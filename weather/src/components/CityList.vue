@@ -2,7 +2,9 @@
   <div id="app">
     <h3>City List</h3>
     <ul>
-      <li v-for="city in cities">
+      <li v-for="city in cities"
+        v-bind:key="city.id"
+      >
         {{ city.name }}
       </li>
     </ul>
