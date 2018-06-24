@@ -5,9 +5,12 @@
       <li v-for="city in cities"
         v-bind:key="city.id"
       >
-        {{ city.name }}
+        <router-link :to="'/weather/' + city.path">
+          {{ city.name }}
+        </router-link>
       </li>
     </ul>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -18,9 +21,11 @@ export default {
     return {
       cities: [{
         id: 1,
+        path: 'tokyo',
         name: 'Tokyo'
       }, {
         id: 2,
+        path: 'newyork',
         name: 'New York'
       }]
     }
