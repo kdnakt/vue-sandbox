@@ -1,10 +1,8 @@
 <template>
   <div>
     <h3>Enter your API key for OpenWeatherMap.org!</h3>
-    <input type="text" id="api-key" v-model="apikey" />
+    <input type="password" id="api-key" v-model="apikey" />
     <button @click="saveApiKey">Save</button>
-    <br>
-    <span>{{this.$store.state.apikey.apikey}}</span>
   </div>
 </template>
 
@@ -13,12 +11,14 @@ export default {
   name: 'Login',
   data() {
     return {
-      apikey: this.$store.state.apikey.apikey
+      apikey: ''
     }
   },
   methods: {
     saveApiKey: function() {
+      // TODO: validate key via API
       this.$store.commit("apikey/setApiKey", this.apikey)
+      this.$router.push({path:'/city'})
     }
   }
 }

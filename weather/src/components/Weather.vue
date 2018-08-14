@@ -1,14 +1,42 @@
 <template>
   <div id="app">
-    <h3>Weather of {{ $route.params.name }}</h3>
+    <h3>Weather of {{ this.name }}</h3>
+    <h3>date: {{ date }}</h3>
+    <h3>temperature: {{ this.temperature }}</h3>
+    <h3>humidity: {{ this.humidity }}</h3>
+    <h3>description: {{ this.description }}</h3>
+    <h3><img :src="this.iconURL" /></h3>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Weather'
+  name: 'Weather',
+  props: ['name'],
+  data: function() {
+    return {current: this.$store.state.weather.current}
+  },
+  computed: {
+    date: function() {
+      const { dt } = this.current
+      return new Date(dt * 1000)
+    },
+    temperature: function() {
+      const { main } = this.current
+      return Math.round(main.temp - 273.15)
+    },
+    humidity: function() {
+      const { main } = this.current
+      return main.humidity
+    },
+    description: function() {
+      return this.current.weather[0].description
+    },
+    iconURL: function() {
+      return `https://openweathermap.org/img/w/${this.current.weather[0].icon}.png`
+    }
+  }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

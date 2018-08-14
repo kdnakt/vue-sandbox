@@ -5,7 +5,10 @@
       <li v-for="city in cities"
         v-bind:key="city.id"
       >
-        <router-link :to="'/weather/' + city.path">
+        <router-link :to="{
+           path: '/weather/' + city.path,
+           params: {city: city}
+        }">
           {{ city.name }}
         </router-link>
       </li>
