@@ -38,7 +38,7 @@ const router = new VueRouter({
             store.commit('weather/setCurrent', data)
             next()
           } else {
-            alert("Something went wrong!")
+            alert("Something went wrong! " + data.message)
             next("/")
           }
         })
