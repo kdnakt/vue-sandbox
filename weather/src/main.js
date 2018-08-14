@@ -13,11 +13,13 @@ Vue.use(VueRouter)
 const API_URL = "https://api.openweathermap.org/data/2.5/";
 async function getCurrentWeather(apikey, name) {
   const endpoint = `${API_URL}weather?q=${name}&appid=${apikey}&lang=ja`
-  console.log(endpoint)
-  const res = await fetch(endpoint)
-  const json = await res.json()
-  console.log(json)
-  return json
+  try {
+    const res = await fetch(endpoint)
+    const json = await res.json()
+    return json
+  } catch(e) {
+    return e
+  }
 }
 
 const router = new VueRouter({
