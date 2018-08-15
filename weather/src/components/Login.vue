@@ -2,7 +2,7 @@
   <div>
     <h3>Enter your API key for OpenWeatherMap.org!</h3>
     <input type="password" id="api-key" v-model="apikey" />
-    <button @click="saveApiKey">Save</button>
+    <button @click="saveApiKey" :disabled="!validApikey" >Save</button>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   data() {
     return {
       apikey: ''
+    }
+  },
+  computed: {
+    validApikey: function() {
+      return !!this.apikey
     }
   },
   methods: {
