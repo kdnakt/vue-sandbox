@@ -3,13 +3,13 @@
     <h3>City List</h3>
     <ul>
       <li v-for="city in cities"
-        v-bind:key="city.id"
+        v-bind:key="city.en"
       >
         <router-link :to="{
-           path: '/weather/' + city.path,
+           path: '/weather/' + city.en.toLowerCase(),
            params: {city: city}
         }">
-          {{ city.name }}
+          {{ `${city.name} (${city.en})` }}
         </router-link>
       </li>
     </ul>
@@ -18,19 +18,13 @@
 </template>
 
 <script>
+import cities from './cities.json'
+
 export default {
   name: 'CityList',
   data: function() {
     return {
-      cities: [{
-        id: 1,
-        path: 'tokyo',
-        name: 'Tokyo'
-      }, {
-        id: 2,
-        path: 'newyork',
-        name: 'New York'
-      }]
+      cities: cities
     }
   }
 }
