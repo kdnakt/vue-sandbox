@@ -22,6 +22,21 @@ async function getCurrentWeather(apikey, name) {
   }
 }
 
+async function getWeatherForecast(apikey, name) {
+  const endpoint = `${API_URL}forecast?q=${name}&appid=${apikey}&lang=ja`
+  try {
+    const res = await fetch(endpoint)
+    const json = await res.json()
+    const forecasts = []
+    json.list.forEach(fc => {
+      forecasts.push(fc)
+    })
+    return forecasts
+  } catch (e) {
+    return e
+  }
+}
+
 const router = new VueRouter({
   routes: [
     { path: '/', component: Login, props: false },
