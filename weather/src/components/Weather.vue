@@ -6,6 +6,11 @@
     <h3>humidity: {{ this.humidity }}</h3>
     <h3>description: {{ this.description }}</h3>
     <h3><img :src="this.iconURL" /></h3>
+    <ul>
+      <li v-for="forecast in forecasts">
+        {{ forecast }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -14,7 +19,11 @@ export default {
   name: 'Weather',
   props: ['name'],
   data: function() {
-    return {current: this.$store.state.weather.current}
+    const w = this.$store.state.weather
+    return {
+      current: w.current,
+      forecasts: w.forecasts
+    }
   },
   computed: {
     date: function() {
