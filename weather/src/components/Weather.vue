@@ -7,8 +7,10 @@
     <h3>description: {{ this.description }}</h3>
     <h3><img :src="this.iconURL" /></h3>
     <ul>
-      <li v-for="forecast in forecasts">
-        {{ forecast }}
+      <li v-for="f in forecasts">
+        <span>Date: {{ new Date(f.dt * 1000).toLocaleString() }} </span>
+        <span>Temperature: {{ Math.round(f.main.temp - 273.15) }}</span>
+        <span><img :src="'https://openweathermap.org/img/w/' + f.weather[0].icon + '.png'" /></span>
       </li>
     </ul>
   </div>
@@ -58,10 +60,13 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
+  display: inline;
   margin: 0 10px;
 }
 a {
   color: #42b983;
+}
+span {
+  display: grid;
 }
 </style>
